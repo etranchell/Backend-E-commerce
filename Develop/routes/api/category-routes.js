@@ -13,14 +13,13 @@ router.get('/', async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  
 });
 
 router.get('/:id', async (req, res) => {
   try {
     const category = await Category.findByPk(req.params.id, {
       include: [{ model: Product }],
-});
+    });
     if (!category) {
       res.status(404).json({ message: 'No category found with that id!' });
       return;
@@ -58,8 +57,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-
-
 router.delete('/:id', async (req, res) => {
   try {
     const category = await Category.destroy({
@@ -73,9 +70,7 @@ router.delete('/:id', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
-  } 
-
-  
+  }
 });
 
 module.exports = router;
